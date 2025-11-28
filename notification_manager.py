@@ -17,4 +17,4 @@ class NotificationManager:
 
     def send_notification(self, message):
         print(f"Sending Notification ... {message}")
-        self.client.chat_postMessage(channel="#test", test=message)
+        self.client.chat_postMessage(channel="#test", text=message)
