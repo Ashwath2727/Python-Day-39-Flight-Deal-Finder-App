@@ -43,6 +43,20 @@ for destination in sheet_data:
     print(f"{destination["city"]}: £{cheapest_flight.price}")
     time.sleep(2)
 
+    if cheapest_flight.price == "N/A":
+        print(f"No direct flight to {destination['city']}. Looking for indirect flights...")
+
+        stop_over_flights = flight_search.check_flights(
+            origin_city_code=ORIGIN_CITY_IATA,
+            destination_city_code=destination["iataCode"],
+            from_time=tomorrow,
+            to_time=six_month_from_today,
+            is_direct=False,
+        )
+
+        cheapest_flight = find_cheapest_flight(stop_over_flights)
+        print(f"Cheapest indirect flight price is £{cheapest_flight.price}")
+
     if cheapest_flight.price != "N/A" and cheapest_flight.price < destination["lowestPrice"]:
         print(f"Lower price flight found to {destination['city']}!")
 

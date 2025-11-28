@@ -72,7 +72,7 @@ class FlightSearch:
             return "Not Found"
         return code
 
-    def check_flights(self, origin_city_code, destination_city_code, from_time, to_time):
+    def check_flights(self, origin_city_code, destination_city_code, from_time, to_time, is_direct=True):
         headers = {
             "Authorization": f"Bearer {self._token}"
         }
@@ -87,6 +87,9 @@ class FlightSearch:
             "currencyCode": "GBP",
             "max": "10",
         }
+
+        if not is_direct:
+            query["nonStop"] = "false"
 
         response = requests.get(
             url=FLIGHT_ENDPOINT,

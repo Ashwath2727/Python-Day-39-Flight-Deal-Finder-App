@@ -27,6 +27,7 @@ class DataManager:
     def get_destination_data(self):
         response = requests.get(url=SHETTY_ENDPOINT, auth=self._authorization)
         data = response.json()
+        print(data)
 
         self.destination_data = data["prices"]
 
